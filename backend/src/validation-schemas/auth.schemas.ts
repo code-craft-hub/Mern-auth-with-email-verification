@@ -22,17 +22,17 @@ export const handleAppError = (res: Response, error: AppError) => {
   });
 };
 
-export const registerSchema = z
-  .object({
-    email: z.string().email().min(1).max(255),
-    password: z.string().min(6).max(255),
+export const loginSchema = z.object({
+  email: z.string().email().min(1).max(255),
+  password: z.string().min(6).max(255),
+  userAgent: z.string().optional(),
+});
+
+export const registerSchema = loginSchema
+  .extend({
     confirmPassword: z.string().min(6).max(255),
-    userAgent: z.string().optional(),
   })
   .refine(({ password, confirmPassword }) => password === confirmPassword, {
     message: "Passwords do not match",
     path: ["confirmPassword"],
   });
-
-
-  export const loginSchema = z.object({})

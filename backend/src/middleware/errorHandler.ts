@@ -4,7 +4,7 @@ import { z } from "zod";
 import {
   handleAppError,
   handleZodError,
-} from "../validation-schemas/validationSchema";
+} from "../validation-schemas/auth.schemas";
 import AppError from "../utils/AppError";
 
 const errorHandler: ErrorRequestHandler = (error, req, res, next) => {

@@ -1,30 +1,31 @@
+import dotenv from "dotenv";
+dotenv.config();
 import express from "express";
 import connectToDatabase from "./config/db";
 import cors from "cors";
-import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import errorHandler from "./middleware/errorHandler";
 import authRoutes from "./routes/auth.route";
+import { APP_ORIGIN, PORT } from "./constants/env";
 
-dotenv.config();
-
-const PORT = process.env.PORT || 5001;
+const port = PORT || 5001;
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 app.use(
   cors({
-    origin: process.env.APP_ORIGIN,
+    origin: APP_ORIGIN,
     credentials: true,
   })
 );
-app.use(cookieParser());
 
 app.use("/auth", authRoutes);
 
 app.use(errorHandler);
-app.listen(PORT, () => {
-  console.log("server is running on port : " + PORT);
+
+app.listen(port, () => {
+  console.log("server is running on port : " + port);
   connectToDatabase();
 });

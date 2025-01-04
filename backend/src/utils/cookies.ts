@@ -1,7 +1,8 @@
 import { CookieOptions, Response } from "express";
 import { fifteenMinutesFromNow, thirtyDaysFromNow } from "./date";
+import { NODE_ENV } from "../constants/env";
 
-const secure = process.env.NODE_ENV !== "development";
+const secure = NODE_ENV !== "development";
 
 type Params = {
   res: Response;
