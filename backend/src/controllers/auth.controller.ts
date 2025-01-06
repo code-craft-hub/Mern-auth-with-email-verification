@@ -39,8 +39,9 @@ export const registerHandler = catchErrors(async (req, res) => {
 });
 
 export const loginHandler = catchErrors(async (req, res) => {
+  
 
-  console.log(req.headers, "REQUEST OBJECT : ", req.res, ": END OF REQUEST OBJECT")
+  console.log(req.body)
 
   const request = loginSchema.parse({
     ...req.body,
